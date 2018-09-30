@@ -1,19 +1,18 @@
-extends layout
-block content
-    //section#playground
-    //    table
-    //        each person in names
-    //            tr
-    //                each name in person
-    //                    td= name
-    section#content
-        if name
-            h2= text
-            if hint
-                p
-                    i Hint: #{hint}
-            a(href=`${id}?side=${sideToShow}`)= sideToShowDisplay
-            br
-            a(href="/cards")= 'New Question'
-        else
-            a(href="/")= 'Start Here'
+extends app
+block card
+    section(class='flashcards')
+        .card(class=`card-${side}`)
+            .card-header
+            h1.card-title= side
+            #content
+                h2= text
+                if hint
+                    p.hint
+                        i= hint
+            .card-flip-wrap
+                a(href=`${id}?side=${sideToShow}`)
+                    img.card-flip(src='/static/img/flip.svg')
+            .card-next
+                a(href="/cards")
+                    img(src='/static/img/next.svg')
+        script(src='/static/js/app.js')

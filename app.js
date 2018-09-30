@@ -6,18 +6,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-
-// const names = [
-//     {
-//         firstName: 'Jimmy',
-//         lastName: 'Ghelani'
-//     },
-//     {
-//         firstName: 'Aliya',
-//         lastName: 'Kamalia'
-//     }
-// ];
-
+app.use('/static', express.static('public'));
 
 app.set('view engine', 'pug');
 
@@ -31,7 +20,7 @@ app.use((req, res, next)=>{
     const err = new Error('Not Found');
     err.status = 404;
     next(err);
-})
+});
 
 app.use((err,req, res, next) =>{
     res.locals.error = err;
