@@ -4,5 +4,9 @@ html
         title Flash Cards
     body
         include includes/header
+            if name
+                h2 Welcome, #{name}!
+                form(action='/goodbye', method='post')
+                    button(type='submit') Goodbye
         block content
         include includes/footer

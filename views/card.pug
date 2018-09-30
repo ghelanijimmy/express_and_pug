@@ -7,10 +7,13 @@ block content
     //                each name in person
     //                    td= name
     section#content
-        h2= text
-        if hint
-            p
-                i Hint: #{hint}
-        a(href=`${id}?side=${sideToShow}`)= sideToShowDisplay
-        br
-        a(href="/cards")= 'New Question'
+        if name
+            h2= text
+            if hint
+                p
+                    i Hint: #{hint}
+            a(href=`${id}?side=${sideToShow}`)= sideToShowDisplay
+            br
+            a(href="/cards")= 'New Question'
+        else
+            a(href="/")= 'Start Here'

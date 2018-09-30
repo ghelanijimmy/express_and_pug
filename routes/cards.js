@@ -4,14 +4,18 @@ const { data } = require('../data/flashcardData.json');
 const { cards } = data;
 
 router.get('/:id', (req, res)=>{
+    const name = req.cookies.username;
     const {side} = req.query;
     const {id} = req.params;
+    if(!name){
+        res.redirect('/');
+    }
     if(!side){
         res.redirect(`/cards/${id}?side=question`);
     }
     const text = cards[id][side];
     const {hint} = cards[id];
-    const templateData = {id, text};
+    const templateData = {id, text, name};
     if(side === 'question'){
         templateData.hint = hint;
         templateData.sideToShow = 'answer';
@@ -26,8 +30,8 @@ router.get('/:id', (req, res)=>{
 
 router.get('/', (req, res)=>{
     const numberOfCards = cards.length;
-    const id = Math.floor(Math.random() * numberOfCards);
-    res.redirect(`/cards/${id}?side=question`);
+    const flashCardId = Math.floor(Math.random() * numberOfCards);
+    res.redirect(`/cards/${flashCardId}`);
 });
 
 module.exports = router;
